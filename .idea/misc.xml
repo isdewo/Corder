@@ -3,21 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/NEW/AndroidStudioProjects/Corder/app/src/main/res/layout/activity_join.xml" value="0.1" />
-        <entry key="..\:/Users/NEW/AndroidStudioProjects/Corder/app/src/main/res/layout/activity_login.xml" value="0.17806484295845998" />
-        <entry key="..\:/Users/NEW/AndroidStudioProjects/Corder/app/src/main/res/layout/activity_main.xml" value="0.24954710144927536" />
         <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3645" />
         <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/drawable/button.xml" value="0.3645" />
         <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/drawable/button_full.xml" value="0.3645" />
         <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/drawable/button_radius.xml" value="0.3645" />
         <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/drawable/button_round.xml" value="0.3645" />
+        <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/drawable/clickbutton.xml" value="0.1" />
         <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.205" />
         <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/drawable/ic_crop_original_24.xml" value="0.191" />
+        <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/drawable/joinbutton.xml" value="0.2635" />
+        <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/drawable/joinbutton2.xml" value="0.2635" />
         <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/drawable/rnd_rct_orange.xml" value="0.209" />
+        <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/drawable/rnd_rct_rndskbl.xml" value="0.209" />
         <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/drawable/rnd_rct_skyblue.xml" value="0.209" />
         <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/font/font.xml" value="0.37083333333333335" />
-        <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/layout/activity_join.xml" value="0.17916666666666667" />
-        <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/layout/activity_login.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/layout/activity_add_cafe.xml" value="0.3439814814814815" />
+        <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/layout/activity_join.xml" value="0.264" />
+        <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/layout/activity_owner_cafe_info.xml" value="0.2439814814814815" />
         <entry key="..\:/Users/PARK/Documents/mju/TeamProject/Corder/app/src/main/res/layout/activity_owner_check_seat.xml" value="0.11203703703703703" />

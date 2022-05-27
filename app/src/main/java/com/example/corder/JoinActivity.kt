@@ -2,6 +2,7 @@ package com.example.corder
 
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -23,12 +24,24 @@ class JoinActivity : AppCompatActivity(){
 
     private var userSort = 0
     private var isBlank = false // 빈칸 확인
+    private var clickBtn = ""
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_join)
 
         auth = FirebaseAuth.getInstance()
+
+        val supervisorBtn = findViewById<Button>(R.id.supervisorBtn)
+        supervisorBtn.setOnClickListener{
+            clickBtn = "supervisor"
+        }
+
+        val customerBtn = findViewById<Button>(R.id.customerBtn)
+        customerBtn.setOnClickListener{
+            clickBtn = "customer"
+        }
+
 
         val idCreation = findViewById<Button>(R.id.idCreation)
         idCreation.setOnClickListener{
@@ -45,13 +58,13 @@ class JoinActivity : AppCompatActivity(){
         val inputName = findViewById<EditText>(R.id.inputName)
         val name = inputName.text.toString().trim()
 
-        val sellerButton = findViewById<Button>(R.id.button3)
+        val sellerButton = findViewById<Button>(R.id.supervisorBtn)
         sellerButton.setOnClickListener{
             val userNumb = Random.nextInt(0,200)
             userSort = userNumb
         }
 
-        val customerButton = findViewById<Button>(R.id.button2)
+        val customerButton = findViewById<Button>(R.id.customerBtn)
         customerButton.setOnClickListener {
             userSort = 0
         }
@@ -89,11 +102,19 @@ class JoinActivity : AppCompatActivity(){
 
     private fun updateUI(user: FirebaseUser?){
         if(user != null){
-            // 로그인 화면으로 이동
-            val intent = Intent(this, LoginActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            startActivity(intent)
-            curUser = Firebase.auth.currentUser!!
+            if(clickBtn == "customer"){
+                // 로그인 화면으로 이동
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                startActivity(intent)
+                curUser = Firebase.auth.currentUser!!
+            }else if(clickBtn == "supervisor"){
+                // 가게정보 등록 화면으로 이동
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                startActivity(intent)
+                curUser = Firebase.auth.currentUser!!
+            }
         }
     }
 }

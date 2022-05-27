@@ -32,6 +32,7 @@
         android:textAlignment="textStart"
         android:textColor="#000000"
         android:textColorHint="#5A5858"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -50,6 +51,7 @@
         android:textAlignment="textStart"
         android:textColor="#000000"
         android:textColorHint="#5A5858"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputId" />
@@ -72,41 +74,36 @@
         android:textAlignment="textStart"
         android:textColor="#000000"
         android:textColorHint="#5A5858"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputPw" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="140dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="110dp"
+    <android.widget.Button
+        android:id="@+id/customerBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="1dp"
-        android:background="@drawable/rnd_rct_skyblue"
+        android:background="@drawable/clickbutton"
         android:text="customer"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputName" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="140dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="1dp"
+    <android.widget.Button
+        android:id="@+id/supervisorBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="110dp"
-        android:background="@drawable/rnd_rct_skyblue"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/clickbutton"
         android:text="supervisor"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button2"
         app:layout_constraintTop_toBottomOf="@+id/inputName" />
 
     <Button
@@ -117,7 +114,7 @@
 
         android:background="@drawable/rnd_rct_rndskbl"
         android:text="계정 생성"
-        android:textColor="#2196F3"
+        android:textColor="@color/white"
         android:textSize="20sp"
 
         android:textStyle="bold"

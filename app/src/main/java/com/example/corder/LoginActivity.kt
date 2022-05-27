@@ -36,9 +36,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login(){
-        val em = findViewById<EditText>(R.id.editTextTextPersonName4)
+        val em = findViewById<EditText>(R.id.et_email)
         val email = em.text.toString()
-        val pw = findViewById<EditText>(R.id.editTextTextPersonName5)
+        val pw = findViewById<EditText>(R.id.et_Password)
         val password = pw.text.toString()
 
         if(email.isBlank()|| password.isBlank()){
