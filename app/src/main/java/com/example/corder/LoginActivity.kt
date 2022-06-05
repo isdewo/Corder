@@ -71,6 +71,7 @@ class LoginActivity : AppCompatActivity() {
         editor.putBoolean("login", true)
         editor.commit()
     }
+
     private fun updateUI(user: FirebaseUser? ){
         if(user != null) {
             val intent = Intent(applicationContext, MainActivity::class.java)

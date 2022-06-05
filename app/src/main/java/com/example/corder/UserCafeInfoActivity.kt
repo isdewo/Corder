@@ -4,59 +4,45 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.corder.databinding.ActivityMainBinding
 import com.example.corder.databinding.ActivityUserCafeInfoBinding
+import kotlinx.android.synthetic.main.activity_user_cafe_info.*
 
 class UserCafeInfoActivity : AppCompatActivity() {
-////    private var mBinding : ActivityUserCafeInfoBinding? = null
-////    private val binding get() = mBinding!!
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_user_cafe_info)
-////        mBinding = ActivityUserCafeInfoBinding.inflate(layoutInflater)
-////        setContentView(binding.root)
-//
-//        val listMenu = findViewById<RecyclerView>(R.id.menuList)
-//        val linearLayoutManager = LinearLayoutManager(this)
-//
-////        binding.listMenu.layoutManager = linearLayoutManager
-//        listMenu.layoutManager = linearLayoutManager
-//
-//        var list = ArrayList<ListMenu>()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_user_cafe_info)
+
+        val name = intent.getStringExtra("name")
+        tv_name.setText(name)
+
+        val getMenu = findViewById<Button>(R.id.getmenu)
+
+        getMenu.setOnClickListener {
+            // 메뉴확인페이지
+            startActivity(Intent(this, MenuActivity::class.java))
+        }
+    }
+//        val list = ArrayList<ListMenu>()
 //        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, 1, "아메리카노", 3000))
 //        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, 2, "카페라떼", 3500))
 //        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, 3, "요거트스무디", 5500))
 //
-//        val adapter = RecyclerMenuAdapter(list)
-////        binding.listMenu.adapter = adapter
-//        listMenu.adapter = adapter
+//        val adapter = RecyclerMenuAdapter(list, {data -> adapterOnClick(data)})
+//        val listCafe = findViewById<RecyclerView>(R.id.listMenu)
+//        listCafe.layoutManager = LinearLayoutManager(this)
+//
+//        listCafe.adapter = adapter
 //    }
-
-    private var mBinding : ActivityUserCafeInfoBinding? = null
-    private val binding get() = mBinding!!
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_cafe_info)
-        mBinding = ActivityUserCafeInfoBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-
-        val listCafe = findViewById<RecyclerView>(R.id.listCafe)
-        val linearLayoutManager = LinearLayoutManager(this)
-//        binding.menuList.layoutManager = linearLayoutManager
-        listCafe.layoutManager = linearLayoutManager
-
-        var list = ArrayList<ListMenu>()
-        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, 1, "아메리카노", 3000))
-        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, 2, "카페라떼", 3500))
-        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, 3, "요거트스무디", 5500))
-
-        val adapter = RecyclerMenuAdapter(list)
-//        binding.menuList.adapter = adapter
-        listCafe.adapter = adapter
-    }
+//
+//    private fun adapterOnClick(data: ListMenu){
+//        Toast.makeText(applicationContext, "menu : ${data.menuName}, cost: ${data.menuCost}", Toast.LENGTH_SHORT).show()
+////        var intent = Intent(this, UserCafeInfoActivity::class.java)
+////        startActivity(intent)
+//    }
 }
