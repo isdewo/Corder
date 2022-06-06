@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("email", a)
         editor.putString("password",b)
         editor.putBoolean("login", true)
-        editor.commit()
+        editor.apply()
     }
 
     private fun updateUI(user: FirebaseUser? ){

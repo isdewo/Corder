@@ -1,5 +1,12 @@
 package com.example.corder
 
+import com.google.firebase.database.core.view.View
+
+
 interface ImageClickListener {
-    abstract fun onClick(adapterPosition: Int)
+
+    fun onItemClick(holder:RecyclerMainAdapter.ViewHolder?, view: View?, position: Int){
+
+
+    }
 }
