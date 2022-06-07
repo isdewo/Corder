@@ -89,7 +89,9 @@ class JoinActivity : AppCompatActivity(){
                         Log.d(TAG,"회원가입 성공")
                         val user = auth.currentUser
                         Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                        val id = auth.uid
                         updateUI(user)
+                        registerUser(email, name, id, password, userSort)
                     }
                     else{
                         Log.d(TAG,"회원가입 실패",task.exception)
@@ -123,5 +125,10 @@ class JoinActivity : AppCompatActivity(){
                 curUser = Firebase.auth.currentUser!!
             }
         }
+    }
+    
+    private fun registerUser(userEmail:String,userName: String,uID:String?, userPW:String, userSort:Int){
+        val user = User(userEmail, userName, uID , userPW, userSort)
+        database.child("users").push().setValue(user)
     }
 }
