@@ -44,7 +44,6 @@ class JoinActivity : AppCompatActivity(){
                 }
             }
         }
-
         val idCreation = findViewById<Button>(R.id.idCreation)
         idCreation.setOnClickListener{
             register()
