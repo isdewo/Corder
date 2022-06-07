@@ -2,12 +2,10 @@ package com.example.corder
 
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -34,6 +32,7 @@ class JoinActivity : AppCompatActivity(){
         setContentView(R.layout.activity_join)
 
         auth = FirebaseAuth.getInstance()
+
 
         radioGroup.setOnCheckedChangeListener{ _, checkedId ->
             when(checkedId){
@@ -89,7 +88,9 @@ class JoinActivity : AppCompatActivity(){
                         Log.d(TAG,"회원가입 성공")
                         val user = auth.currentUser
                         Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                        val id = auth.uid
                         updateUI(user)
+                        registerUser(email, name, id , password, userSort)
                     }
                     else{
                         Log.d(TAG,"회원가입 실패",task.exception)
@@ -102,7 +103,6 @@ class JoinActivity : AppCompatActivity(){
                 Toast.makeText(this, "빈 칸을 모두 채워 주세요",Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 
     private fun updateUI(user: FirebaseUser?){
@@ -124,4 +124,10 @@ class JoinActivity : AppCompatActivity(){
             }
         }
     }
+
+    private fun registerUser(userEmail:String,userName: String,uID:String?, userPW:String, userSort:Int){
+        val user = User(userEmail, userName, uID , userPW, userSort)
+        database.child("users").push().setValue(user)
+    }
+
 }
