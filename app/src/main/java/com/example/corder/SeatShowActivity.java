@@ -69,8 +69,13 @@ public class SeatShowActivity extends AppCompatActivity {
             seatLayout.addView(showSet);
 
             SeatShowView s;
+
+            //Set에 저장된 좌석 정보 저장
             for(int j = 0; j < seatN - 1; j++){
                 s = new SeatShowView(getApplicationContext());
+                //s에 번호 부여
+                s.setId(i*setNum + j + 1);
+
                 showSet.getLayoutParams().width += addWidth;
 
                 //showSet.setLayoutParams(prms);
@@ -113,6 +118,11 @@ public class SeatShowActivity extends AppCompatActivity {
         adrmString = "";
         sets.clear();
         seatLayout.removeAllViewsInLayout();
+    }
+
+    //번호를 매개변수로 넣으면 그 번호에 해당하는 좌석의 빈 자리인지의 여부가 리턴
+    public boolean getSeatIsSet(int i){
+        return seats.get(i - 1).isSat;
     }
 
     public class SeatShowSet extends LinearLayout{
