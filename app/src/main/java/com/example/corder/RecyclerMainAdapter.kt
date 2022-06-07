@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class RecyclerMainAdapter(private var items: ArrayList<ListData>, private val onClick: (ListData) -> Unit) : RecyclerView.Adapter<RecyclerMainAdapter.ViewHolder>() {
     override fun getItemCount(): Int = items.size
@@ -37,8 +37,8 @@ class RecyclerMainAdapter(private var items: ArrayList<ListData>, private val on
         var ivImg = view.findViewById<ImageView>(R.id.ivImg)
         var tvCname = view.findViewById<TextView>(R.id.tvCname)
         fun bind(listener: View.OnClickListener, item: ListData) {
-            ivImg.setImageDrawable(item.img)
-            tvCname.setText(item.cName)
+            Glide.with(ivImg.context).load(item.imgUrl).into(ivImg)
+            tvCname.setText(item.cafeName)
             view.setOnClickListener(listener)
         }
     }

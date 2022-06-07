@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -14,6 +15,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_join.*
 import kotlin.random.Random
 
 class JoinActivity : AppCompatActivity(){
@@ -24,7 +26,8 @@ class JoinActivity : AppCompatActivity(){
 
     private var userSort = 0
     private var isBlank = false // 빈칸 확인
-    private var clickBtn = ""
+    private var clickBtn = 0
+    private var userType = ""
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -32,16 +35,16 @@ class JoinActivity : AppCompatActivity(){
 
         auth = FirebaseAuth.getInstance()
 
-        val supervisorBtn = findViewById<Button>(R.id.supervisorBtn)
-        supervisorBtn.setOnClickListener{
-            clickBtn = "supervisor"
+        radioGroup.setOnCheckedChangeListener{ _, checkedId ->
+            when(checkedId){
+                R.id.customerBtn -> {
+                    clickBtn = 0
+                }
+                R.id.supervisorBtn -> {
+                    clickBtn = 1
+                }
+            }
         }
-
-        val customerBtn = findViewById<Button>(R.id.customerBtn)
-        customerBtn.setOnClickListener{
-            clickBtn = "customer"
-        }
-
 
         val idCreation = findViewById<Button>(R.id.idCreation)
         idCreation.setOnClickListener{
@@ -62,11 +65,13 @@ class JoinActivity : AppCompatActivity(){
         sellerButton.setOnClickListener{
             val userNumb = Random.nextInt(0,200)
             userSort = userNumb
+            userType = "supervisor"
         }
 
         val customerButton = findViewById<Button>(R.id.customerBtn)
         customerButton.setOnClickListener {
             userSort = 0
+            userType = "customer"
         }
 
         if (email.isEmpty() || password.isEmpty() || name.isEmpty()) {
@@ -102,15 +107,17 @@ class JoinActivity : AppCompatActivity(){
 
     private fun updateUI(user: FirebaseUser?){
         if(user != null){
-            if(clickBtn == "customer"){
+            if(clickBtn == 0){
                 // 로그인 화면으로 이동
+                Toast.makeText(this, "customer로 회원가입 되었습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)
                 curUser = Firebase.auth.currentUser!!
-            }else if(clickBtn == "supervisor"){
+            }else if(clickBtn == 1){
                 // 가게정보 등록 화면으로 이동
-                val intent = Intent(this, LoginActivity::class.java)
+                Toast.makeText(this, "supervisor로 회원가입 되었습니다.", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, OwnerCafeInfoActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)
                 curUser = Firebase.auth.currentUser!!

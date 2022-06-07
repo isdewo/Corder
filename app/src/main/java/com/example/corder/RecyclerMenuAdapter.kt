@@ -3,7 +3,6 @@ package com.example.corder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_menu.view.*
 
@@ -13,8 +12,7 @@ class RecyclerMenuAdapter(private val items: ArrayList<ListMenu>, private val on
 
     override fun onBindViewHolder(holder: RecyclerMenuAdapter.ViewHolder, position: Int) {
         val item = items[position]
-        val listener = View.OnClickListener { it ->
-//            Toast.makeText(it.context, "Clicked -> menuName: ${item.menuName}, cost: ${item.menuCost}", Toast.LENGTH_SHORT).show()
+        val listener = View.OnClickListener {
             item.let {
                 onClick(item)
             }
