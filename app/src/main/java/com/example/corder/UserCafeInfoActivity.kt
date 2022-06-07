@@ -12,11 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.corder.databinding.ActivityMainBinding
 import com.example.corder.databinding.ActivityUserCafeInfoBinding
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_user_cafe_info.*
 
 class UserCafeInfoActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_user_cafe_info)
 
         val name = intent.getStringExtra("name")
@@ -24,7 +27,18 @@ class UserCafeInfoActivity : AppCompatActivity() {
 
         val imgurl = intent.getStringExtra("image")
         Glide.with(this).load(imgurl).into(shopPicture)
-//        shopPicture.setImageBitmap(img)
+
+        val time = intent.getStringExtra("cafeTime")
+        inputTime.setText(time)
+
+        val addr = intent.getStringExtra("cafeAddress")
+        address.setText(addr)
+
+        val callNum = intent.getStringExtra("cafeCall")
+        call.setText(callNum)
+
+        val limit = intent.getIntExtra("limitPrice", 0)
+        lowOrder.setText(limit.toString())
 
         val getMenu = findViewById<Button>(R.id.getmenu)
 

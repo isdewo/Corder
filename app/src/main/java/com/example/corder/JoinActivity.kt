@@ -111,14 +111,14 @@ class JoinActivity : AppCompatActivity(){
         if(user != null){
             if(clickBtn == 0){
                 // 로그인 화면으로 이동
-                Toast.makeText(this, "customer로 회원가입 되었습니다.", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "customer로 회원가입 되었습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)
                 curUser = Firebase.auth.currentUser!!
             }else if(clickBtn == 1){
                 // 가게정보 등록 화면으로 이동
-                Toast.makeText(this, "supervisor로 회원가입 되었습니다.", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "supervisor로 회원가입 되었습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, OwnerCafeInfoActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)

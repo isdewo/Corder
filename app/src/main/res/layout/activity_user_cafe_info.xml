@@ -57,14 +57,14 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
-            android:text="휴게시간: "
+            android:text="전화번호: "
             android:textSize="25sp" />
         <TextView
-            android:id="@+id/breakTime"
+            android:id="@+id/call"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
-            android:text="10:00 ~ 18:00 "
+            android:text="010-1111-1111 "
             android:textSize="25sp"/>
     </LinearLayout>
     <LinearLayout
@@ -100,7 +100,7 @@
             android:id="@+id/lowOrder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="15,000원"
+            android:text="15000"
             android:textSize="25sp"/>
     </LinearLayout>
 
