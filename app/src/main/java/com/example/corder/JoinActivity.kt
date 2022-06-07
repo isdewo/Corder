@@ -100,7 +100,6 @@ class JoinActivity : AppCompatActivity(){
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)
                 curUser = Firebase.auth.currentUser!!
-                database.child("users").child("userSort").push().setValue(false)
             }else if(clickBtn == "supervisor"){
                 // 로그인 화면으로 이동
                 userSort = true
@@ -108,7 +107,6 @@ class JoinActivity : AppCompatActivity(){
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)
                 curUser = Firebase.auth.currentUser!!
-                database.child("users").child("userSort").push().setValue(true)
 
             }
         }
