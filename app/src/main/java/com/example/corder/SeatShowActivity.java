@@ -1,5 +1,8 @@
 package com.example.corder;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,9 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.Vector;
 
 public class SeatShowActivity extends AppCompatActivity {
@@ -22,6 +22,7 @@ public class SeatShowActivity extends AppCompatActivity {
     int seatNum = 0;
     int setNum = 0;
     int emptySeats = 0;
+    int sat = 0;
     RelativeLayout seatLayout;
     Button editButton;
     Vector<SeatShowView> seats = new Vector<>();
@@ -45,23 +46,30 @@ public class SeatShowActivity extends AppCompatActivity {
             public void onClick(View v) {   startEdit();   }
         });
 
-        if(!adrmText.equals("")) {
-            decodeMessage(adrmText);
+        if(adrmText!=null) {
+            if (!adrmText.equals("")) {
+                decodeMessage(adrmText);
+            }
         }
     }
 
     private void decodeMessage(String mes){ //메세지를 해독하여 그에 맞는 좌석들을 배치
-        String[] perValue = new String[3];
+        String[] perValue = new String[4];
         String[] perSeatInfo = mes.split(" ");
         setNum = perSeatInfo.length;
         int addWidth = 190;
+        int seatId = 0;
         for(int i = 0; i < setNum; i++){
             perValue = perSeatInfo[i].split("_");
             showSet = new SeatShowSet(getApplicationContext());
             showSet.setX(Float.parseFloat(perValue[0]));
             showSet.setY(Float.parseFloat(perValue[1]));
             int seatN = Integer.parseInt(perValue[2]);
+            String satSeats = perValue[3];
 
+            String[] perSeat = satSeats.split("/");
+
+            showSet.seatList.get(0).setId(++seatId);
             //레이아웃 세트마다 좌석 수 세기
             seatNum += seatN;
 
@@ -69,12 +77,11 @@ public class SeatShowActivity extends AppCompatActivity {
             seatLayout.addView(showSet);
 
             SeatShowView s;
-
-            //Set에 저장된 좌석 정보 저장
             for(int j = 0; j < seatN - 1; j++){
                 s = new SeatShowView(getApplicationContext());
                 //s에 번호 부여
-                s.setId(i*setNum + j + 1);
+                seatId++;
+                s.setId(seatId);
 
                 showSet.getLayoutParams().width += addWidth;
 
@@ -84,32 +91,41 @@ public class SeatShowActivity extends AppCompatActivity {
                 showSet.addView(s);
 
                 showSet.addView(new emptyTV(getApplicationContext()));
+                seats.add(s);
             }
 
-            /*SeatShowView ssv = new SeatShowView(getApplicationContext());
-            ssv.setId(Integer.parseInt(perValue[0]));
+            for(int j = 0; j < perSeat.length; j++)
+            {
+                if(perSeat[j].equals(""))
+                {
+                    continue;
+                }
+                SeatShowView sv = showSet.seatList.get(Integer.parseInt(perSeat[j]));
+                sv.isSat = true;
+                sv.setBackgroundResource(R.drawable.rct_greenrct);
+                sat++;
+            }
 
-            ssv.setX(Float.parseFloat(perValue[1]));
-            ssv.setY(Float.parseFloat(perValue[2]));*/
-
-            //add 된 seats들을 화면에다 넣기.
-            /*seats.add(ssv);
-            seatLayout.addView(ssv);*/
-            //Log.i("Tag1", ssv.getId() + ": Now X: " + ssv.getX());
         }
         emptySeats = seatNum;
+        emptySeats -= sat;
     }
 
     private void startEdit(){
-        Intent intent = new Intent(this, SeatEditActivity.class);
+        Intent intent = new Intent(this, com.example.corder.SeatEditActivity.class);
 
         for(int i = 0; i < sets.size(); i++){
-            /*SeatShowView ssv = seats.get(i);
-            adrmString += String.valueOf(ssv.getId()) + '_' + String.valueOf(ssv.getX())
-                    +'_' + String.valueOf(ssv.getY()) + ' ';*/
+
             SeatShowSet s = sets.get(i);
             adrmString += String.valueOf(s.getX()) + '_'
-                    + String.valueOf(s.getY()) + '_' + String.valueOf(s.seats) + ' ';
+                    + String.valueOf(s.getY()) + '_' + String.valueOf(s.seats) + '_' + '/';
+            for(int j =0; j< s.seatList.size(); j++)
+            {
+                if(s.seatList.get(j).isSat){
+                    adrmString+= String.valueOf(j) + '/';
+                }
+            }
+            adrmString += ' ';
         }
 
         intent.putExtra("seatAdrMessage2", adrmString);
@@ -118,6 +134,7 @@ public class SeatShowActivity extends AppCompatActivity {
         adrmString = "";
         sets.clear();
         seatLayout.removeAllViewsInLayout();
+        sat = 0;
     }
 
     //번호를 매개변수로 넣으면 그 번호에 해당하는 좌석의 빈 자리인지의 여부가 리턴
@@ -139,7 +156,7 @@ public class SeatShowActivity extends AppCompatActivity {
             int widthPixels = metrics.widthPixels * 8/10;
             int heightPixels = widthPixels * 191/124;
 
-            LayoutParams params = new LayoutParams(widthPixels,heightPixels);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(widthPixels,heightPixels);
             params.width = 260;
             params.height = 120;
 
@@ -196,7 +213,7 @@ public class SeatShowActivity extends AppCompatActivity {
                         emptySeats++;
                         //Toast.makeText(getApplicationContext(), "자리 빔", Toast.LENGTH_SHORT).show();
                     }
-                    Toast.makeText(getApplicationContext(), "빈 자리 : " + emptySeats, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getId() +"번 빔 / 빈 자리 : " + emptySeats, Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -219,7 +236,3 @@ public class SeatShowActivity extends AppCompatActivity {
         }
     }
 }
-
-
-
-

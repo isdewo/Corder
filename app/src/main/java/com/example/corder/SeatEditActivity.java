@@ -16,28 +16,34 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.corder.R;
+import com.example.corder.SeatShowActivity;
 
 import java.util.Vector;
 
 public class SeatEditActivity extends AppCompatActivity /*implements View.OnTouchListener*/{
 
-    TextView textView;
+    //TextView textView;
     RelativeLayout seatLayout;
-    Button createSeat;
+    //Button createSeat;
     Button saveButton;
 
     Button createNewOneSeat;
 
+    Button initiateButton;
+
     int seatNum = 0;
     int setNum = 0;
-
+    int sat = 0;
     Vector<SeatTextView> stvs = new Vector<SeatTextView>();
 
     Vector<SeatSet> seatSets = new Vector<SeatSet>();
 
     String adrmString = ""; // 저장될 실제 사용 좌석 액티비티에 전달될
-                            // 메세지
+    // 메세지
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +70,13 @@ public class SeatEditActivity extends AppCompatActivity /*implements View.OnTouc
         }
 
         // 좌석 추가 버튼에 리스너 넣기
-        createSeat = findViewById(R.id.createNewSeat);
+        /*createSeat = findViewById(R.id.createNewS);
         createSeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 createNewSeat();
             }
-        });
+        });*/
 
         createNewOneSeat = findViewById(R.id.createSeatSet);
         createNewOneSeat.setOnClickListener(new View.OnClickListener(){
@@ -78,6 +84,15 @@ public class SeatEditActivity extends AppCompatActivity /*implements View.OnTouc
             public void onClick(View v) { createNewSeatSet(); }
         });
 
+        initiateButton = findViewById(R.id.initiateButton);
+        initiateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                seatLayout.removeAllViewsInLayout();
+                stvs.clear();
+                seatSets.clear();
+            }
+        });
         //좌석 저장 버튼에 리스너 넣기
         saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +104,7 @@ public class SeatEditActivity extends AppCompatActivity /*implements View.OnTouc
     }
 
     private void decodeMessage(String mes){ //메세지를 해독하여 그에 맞는 좌석들을 배치
-        String[] perValue = new String[3];
+        String[] perValue = new String[4];
         String[] perSetInfo = mes.split(" ");
         setNum = perSetInfo.length;
 
@@ -104,6 +119,9 @@ public class SeatEditActivity extends AppCompatActivity /*implements View.OnTouc
             sts.setX(Float.parseFloat(perValue[0]));
             sts.setY(Float.parseFloat(perValue[1]));
             int seatN = Integer.parseInt(perValue[2]);
+            String satSeats = perValue[3];
+
+            String[] perSeat = satSeats.split("/");
 
             seatNum += seatN;
 
@@ -121,23 +139,19 @@ public class SeatEditActivity extends AppCompatActivity /*implements View.OnTouc
 
                 sts.addView(new addSideSeatBt(getApplicationContext(), sts, "right"));
             }
+
+            for(int j = 0; j< perSeat.length; j++)
+            {
+                if(perSeat[j].equals(""))
+                {
+                    continue;
+                }
+                SeatTextView sv = sts.seatList.get(Integer.parseInt(perSeat[j]));
+                sv.isSat = true;
+                sv.setBackgroundResource(R.drawable.rct_greenrct);
+                sat++;
+            }
         }
-
-        /*for(int i = 0; i < seatNum; i++){
-            perValue = perSetInfo[i].split("_");
-            SeatTextView ssv = new SeatTextView(getApplicationContext());
-            ssv.setId(Integer.parseInt(perValue[0]));
-
-            ssv.setX(Float.parseFloat(perValue[1]));
-            ssv.setY(Float.parseFloat(perValue[2]));
-
-            //add 된 seats들을 화면에다 넣기.
-            stvs.add(ssv);
-            seatLayout.addView(ssv);
-
-
-            Log.i("Tag1", ssv.getId() + ": Now X: " + ssv.getX());
-        }*/
     }
     float oldXvalue;
     float oldYvalue;
@@ -168,17 +182,16 @@ public class SeatEditActivity extends AppCompatActivity /*implements View.OnTouc
             int seatNum = sts.seatList.size();
 
             adrmString += String.valueOf(getX) + '_' + String.valueOf(getY)
-                    + '_' + String.valueOf(seatNum) + ' ';
-        }
-        /*for (int i = 0; i < stvs.size(); i++) {
+                    + '_' + String.valueOf(seatNum) + '_' + '/';
+            for(int j = 0; j < sts.seatList.size(); j++)
+            {
+                if(sts.seatList.get(j).isSat){
+                    adrmString+= String.valueOf(j) + '/';
+                }
+            }
 
-            SeatTextView stv = stvs.get(i);
-            float getX = ((ViewGroup)stv.getParent()).getX() + stv.getX();
-            float getY = ((ViewGroup)stv.getParent()).getY() + stv.getY();
-            adrmString += String.valueOf(stv.getId()) + '_' + String.valueOf(getX)
-                    + '_' +
-                    String.valueOf(getY) + ' ';
-        }*/
+            adrmString += ' ';
+        }
 
         intent.putExtra("seatAdrMessage", adrmString);
 
@@ -191,6 +204,7 @@ public class SeatEditActivity extends AppCompatActivity /*implements View.OnTouc
         seatLayout.removeAllViewsInLayout();
         seatSets.clear();
         setNum = 0;
+        sat = 0;
         //finish();
     }
 
@@ -198,6 +212,8 @@ public class SeatEditActivity extends AppCompatActivity /*implements View.OnTouc
 
         Vector<SeatTextView> seatList = new Vector<SeatTextView>();
         Vector<View> viewList = new Vector<View>();
+
+
 
         public SeatSet(Context context) {
             super(context);
@@ -208,7 +224,7 @@ public class SeatEditActivity extends AppCompatActivity /*implements View.OnTouc
             int widthPixels = metrics.widthPixels * 8/10;
             int heightPixels = widthPixels * 191/124;
 
-            LayoutParams params = new LayoutParams(widthPixels,heightPixels);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(widthPixels,heightPixels);
             params.width = 260;
             params.height = 120;
 
@@ -229,12 +245,19 @@ public class SeatEditActivity extends AppCompatActivity /*implements View.OnTouc
             addView(bt2);
 
             //setBackgroundResource(R.drawable.rnd_rct_rndskbl);
-            setOnTouchListener(new OnTouchListener(){
+            setOnTouchListener(new View.OnTouchListener(){
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     return touchDrag(v, event);
                 }
             });
+
+            /*if(!isSat){
+                setBackgroundResource(R.drawable.rct_greenrct);
+            }
+            else{
+                setBackgroundResource(R.drawable.rct_emptyrct);
+            }*/
 
         }
     }
@@ -295,6 +318,7 @@ public class SeatEditActivity extends AppCompatActivity /*implements View.OnTouc
 
     public class SeatTextView extends androidx.appcompat.widget.AppCompatTextView{
 
+        boolean isSat = false;
 
         public SeatTextView(Context context) {
             super(context);
@@ -307,6 +331,17 @@ public class SeatEditActivity extends AppCompatActivity /*implements View.OnTouc
             setId(seatNum);
             setBackgroundResource(R.drawable.rct_emptyrct);
             /*setTextColor(0xFFFFFF);*/
+
+            int wd = (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    getResources().getDimension(R.dimen.seatWidth),
+                    getResources().getDisplayMetrics()
+            );
+            int hgt = (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    getResources().getDimension(R.dimen.seatHeight),
+                    getResources().getDisplayMetrics()
+            );
 
             //레이아웃 설정
             LinearLayout.LayoutParams prms =
