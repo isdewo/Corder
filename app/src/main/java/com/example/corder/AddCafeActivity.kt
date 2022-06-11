@@ -66,6 +66,7 @@ class AddCafeActivity : AppCompatActivity() {
                     Log.d(ContentValues.TAG, "카페 생성 성공")
                     val user = auth.currentUser
                     val email = user?.email
+                    val seatText = ""
                     Toast.makeText(this, "카페 생성 완료!", Toast.LENGTH_SHORT).show()
                     registerCafe(
                         email,
@@ -74,7 +75,8 @@ class AddCafeActivity : AppCompatActivity() {
                         openTime,
                         breakTime,
                         cafeAddress,
-                        limitPrice
+                        limitPrice,
+                        seatText
                     )
                     updateUI(user)
                 }
@@ -102,8 +104,8 @@ class AddCafeActivity : AppCompatActivity() {
         }
     }
 
-    private fun registerCafe( userEmail: String?,cafeName:String, cafeNum:String, openTime:String, breakTime:String, cafeAddress:String, limitPrice:String){
-        val cafe = Cafe(userEmail,cafeName, cafeNum, openTime, breakTime, cafeAddress, limitPrice)
+    private fun registerCafe( userEmail: String?,cafeName:String, cafeNum:String, openTime:String, breakTime:String, cafeAddress:String, limitPrice:String, seatText:String){
+        val cafe = Cafe(userEmail,cafeName, cafeNum, openTime, breakTime, cafeAddress, limitPrice, seatText)
         database.child("cafes").push().setValue(cafe)
     }
 
