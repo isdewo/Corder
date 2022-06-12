@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/CorderIsle/app/src/main/res/layout/activity_add_cafe.xml" value="0.25364583333333335" />
+        <entry key="..\:/CorderIsle/app/src/main/res/layout/activity_join.xml" value="0.2" />
+        <entry key="..\:/CorderIsle/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/CorderIsle/app/src/main/res/layout/activity_menu.xml" value="0.25364583333333335" />
         <entry key="..\:/CorderIsle/app/src/main/res/layout/activity_owner_cafe_info.xml" value="0.25364583333333335" />
         <entry key="..\:/CorderIsle/app/src/main/res/layout/activity_owner_check_seat.xml" value="0.25364583333333335" />
@@ -11,7 +13,7 @@
         <entry key="..\:/CorderIsle/app/src/main/res/layout/activity_owner_order_list.xml" value="0.25364583333333335" />
         <entry key="..\:/CorderIsle/app/src/main/res/layout/activity_owner_page.xml" value="0.25364583333333335" />
         <entry key="..\:/CorderIsle/app/src/main/res/layout/activity_seat_edit.xml" value="0.1" />
-        <entry key="..\:/CorderIsle/app/src/main/res/layout/activity_seat_show.xml" value="0.1" />
+        <entry key="..\:/CorderIsle/app/src/main/res/layout/activity_seat_show.xml" value="0.264" />
         <entry key="..\:/CorderIsle/app/src/main/res/layout/activity_splash.xml" value="0.25364583333333335" />
         <entry key="..\:/CorderIsle/app/src/main/res/layout/activity_supervisor.xml" value="0.25364583333333335" />
         <entry key="..\:/CorderIsle/app/src/main/res/layout/activity_user_cafe_info.xml" value="0.25364583333333335" />

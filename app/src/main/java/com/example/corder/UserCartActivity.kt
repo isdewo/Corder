@@ -15,5 +15,10 @@ class UserCartActivity : AppCompatActivity() {
         clickNotpay.setOnClickListener {
             finish()
         }
+
+        val menuEat = findViewById<Button>(R.id.menuEat)
+        menuEat.setOnClickListener {
+            startActivity(Intent(applicationContext, SeatEditActivity::class.java))
+        }
     }
 }
