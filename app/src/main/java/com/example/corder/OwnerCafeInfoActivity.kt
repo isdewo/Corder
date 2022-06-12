@@ -30,6 +30,7 @@ class OwnerCafeInfoActivity : AppCompatActivity() {
     private val resultLauncher: ActivityResultLauncher<Intent>? = null
     var uri: Uri? = null
     var imgUri: String = ""
+    var downloadUri: Uri? = null
     private val PICK_IMAGE = 10001
     val calendar:Calendar = Calendar.getInstance()
     private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -62,10 +63,13 @@ class OwnerCafeInfoActivity : AppCompatActivity() {
             uri?.let { upload(it) }
         }
 
+
+
         val clickSavebtn = findViewById<Button>(R.id.saveBtn)
         clickSavebtn.setOnClickListener {
 
 //            Toast.makeText(this, "저장버튼: ${imgUri}", Toast.LENGTH_SHORT).show()
+            uri = downloadUri
             imgUri = uri.toString()
             val name = cafeName.text.toString()
             val owner = ownerName.text.toString()
@@ -108,7 +112,7 @@ class OwnerCafeInfoActivity : AppCompatActivity() {
         val fileName = sdf.format(calendar.timeInMillis) + ".jpg"
         val riversRef = storageRef.child("/$fileName")
 
-        riversRef.putFile(uri)
+        val rivers = riversRef.putFile(uri)
             .addOnCompleteListener(this) { taskSnapshot ->
                 if (taskSnapshot.isSuccessful) {
                     Log.d(ContentValues.TAG, "업로드 성공")
@@ -119,5 +123,18 @@ class OwnerCafeInfoActivity : AppCompatActivity() {
                 }
             }
 
+        val urltask = rivers.continueWithTask{ task ->
+            if(!task.isSuccessful){
+                task.exception?.let{
+                    throw it
+                }
+            }
+            riversRef.downloadUrl
+        }.addOnCompleteListener{ task ->
+            if(task.isSuccessful){
+                downloadUri = task.result
+            }
+        }
     }
+
 }
