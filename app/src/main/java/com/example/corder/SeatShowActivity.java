@@ -25,6 +25,7 @@ public class SeatShowActivity extends AppCompatActivity {
     int sat = 0;
     RelativeLayout seatLayout;
     Button editButton;
+    Button finishButton;
     Vector<SeatShowView> seats = new Vector<>();
     Vector<SeatShowSet> sets = new Vector<>();
     String adrmString = "";
@@ -40,10 +41,18 @@ public class SeatShowActivity extends AppCompatActivity {
 
         seatLayout = (RelativeLayout) findViewById(R.id.seatLayout);
         editButton = (Button) findViewById(R.id.editBt);
+        finishButton = (Button) findViewById(R.id.finishBt);
 
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {   startEdit();   }
+        });
+
+        finishButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), com.example.corder.LoginActivity.class));
+            }
         });
 
         if(adrmText!=null) {

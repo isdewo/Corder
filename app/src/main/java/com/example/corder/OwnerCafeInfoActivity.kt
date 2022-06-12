@@ -67,7 +67,7 @@ class OwnerCafeInfoActivity : AppCompatActivity() {
 
 
                 Toast.makeText(this, "카페 정보가 저장되었습니다.", Toast.LENGTH_SHORT).show()
-                var intent = Intent(this, LoginActivity::class.java)
+                var intent = Intent(this, com.example.corder.SeatShowActivity::class.java)
                 startActivity(intent)
             }else {
                 Toast.makeText(this, "정보저장에 실패했습니다.\n다시 입력해주세요.", Toast.LENGTH_SHORT).show()
