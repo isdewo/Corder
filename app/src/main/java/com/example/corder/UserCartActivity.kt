@@ -10,9 +10,10 @@ class UserCartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_cart)
 
-        val menuEat = findViewById<Button>(R.id.menuEat)
-        menuEat.setOnClickListener{
-            startActivity(Intent(this, SeatShowActivity::class.java))
+        // 결제 취소
+        val clickNotpay = findViewById<Button>(R.id.notpay)
+        clickNotpay.setOnClickListener {
+            finish()
         }
     }
 }

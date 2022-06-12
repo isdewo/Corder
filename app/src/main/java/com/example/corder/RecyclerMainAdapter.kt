@@ -1,28 +1,30 @@
 package com.example.corder
 
-import android.content.Intent
+import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.list_item.view.*
+import java.net.URI
 
-class RecyclerMainAdapter(private val items: ArrayList<ListData>) : RecyclerView.Adapter<RecyclerMainAdapter.ViewHolder>(){
+class RecyclerMainAdapter(private var items: ArrayList<ListData>, private val onClick: (ListData) -> Unit) : RecyclerView.Adapter<RecyclerMainAdapter.ViewHolder>() {
+
     override fun getItemCount(): Int = items.size
-
     override fun onBindViewHolder(holder: RecyclerMainAdapter.ViewHolder, position: Int) {
         val item = items[position]
-        val listener = View.OnClickListener { it ->
-            Toast.makeText(it.context, "cName: " + item.cName + " Number: " + item.number, Toast.LENGTH_SHORT).show()
-//            var intent = Intent(items, UserCafeInfoActivity::class.java)
-//            ContextCompat.startActivity(holder.itemView.context, intent, null)
-//            startActivity(intent)
+
+        val listener = View.OnClickListener { it->
+            item.let{
+                onClick(item)
+            }
         }
-        holder.apply {
+        holder.apply{
             bind(listener, item)
             itemView.tag = item
         }
@@ -37,12 +39,15 @@ class RecyclerMainAdapter(private val items: ArrayList<ListData>) : RecyclerView
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v){
-        private var  view: View = v
-        private val ivImg: ImageView = view.findViewById(R.id.ivImg)
-        private val tvCname: TextView = view.findViewById((R.id.tvCname))
-        fun bind(listener: View.OnClickListener, item: ListData){
-            ivImg.setImageDrawable(item.img)
-            tvCname.setText(item.cName)
+        private var view: View = v
+        var ivImg = view.findViewById<ImageView>(R.id.ivImg)
+        var tvCname = view.findViewById<TextView>(R.id.tvCname)
+        fun bind(listener: View.OnClickListener, item: ListData) {
+//            var uri = Uri.parse(item.imgUri)
+            Glide.with(ivImg.context).load(item.imgUri).into(ivImg)
+//            ivImg.setImageURI(uri)
+//            ivImg.setImageURI(Uri.parse(item.imgUrl))
+            tvCname.setText(item.cafeName)
             view.setOnClickListener(listener)
         }
     }
