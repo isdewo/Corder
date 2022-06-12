@@ -4,9 +4,23 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import kotlinx.android.synthetic.main.activity_add_menu.*
 import kotlinx.android.synthetic.main.activity_user_select_drink.*
+import kotlinx.android.synthetic.main.activity_user_select_drink.menuName
 
 class UserSelectDrinkActivity : AppCompatActivity() {
+
+    private lateinit var database: DatabaseReference
+    private lateinit var storageRef: StorageReference
+    private lateinit var storage: FirebaseStorage
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_select_drink)
@@ -56,12 +70,36 @@ class UserSelectDrinkActivity : AppCompatActivity() {
         }
 
         // 장바구니에 넣기
-        val clickPushbtn = findViewById<Button>(R.id.push)
-        clickPushbtn.setOnClickListener {
-            var intent = Intent(this, UserCartActivity::class.java)
-            startActivity(intent)
-        }
+        val clickPush = findViewById<Button>(R.id.push)
+        clickPush.setOnClickListener{
+            val user = Firebase.auth.currentUser
+            var uid = "0"
+            if(user != null){
+                uid = user.uid
+            }
 
+            val name = menuName.text.toString()
+            val cost = total.text.toString().toInt()
+            val count = menuEA.text.toString().toInt()
+
+
+            if (name != "" && cost != -1 && uid != "0") {
+                database = Firebase.database.reference
+//                Toast.makeText(this, "${imgUri}", Toast.LENGTH_SHORT).show()
+                val listOrderMenu =
+                    ListOrderMenu(name, cost, count)
+
+                database.child("cart").child(uid).child(name).setValue(listOrderMenu)
+
+                Toast.makeText(this, "장바구니에 추가되었습니다.", Toast.LENGTH_SHORT).show()
+//                var intent = Intent(this, MenuActivity::class.java)
+//                startActivity(intent)
+                finish()
+
+            } else {
+                Toast.makeText(this, "다시 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
 }

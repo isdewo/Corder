@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 
 class OwnerPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +42,15 @@ class OwnerPageActivity : AppCompatActivity() {
         moveBtn5.setOnClickListener {
             // 가게 정보 변경
             startActivity(Intent(this, OwnerCafeInfoActivity::class.java))
+        }
+
+        // logout
+        val clickLogout = findViewById<Button>(R.id.logout)
+        clickLogout.setOnClickListener {
+            Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
+            var intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

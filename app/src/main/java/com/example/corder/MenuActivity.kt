@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import kotlinx.android.synthetic.main.activity_add_menu.*
 
 
 class MenuActivity : AppCompatActivity() {
@@ -34,6 +36,23 @@ class MenuActivity : AppCompatActivity() {
         clickCartbtn.setOnClickListener {
             var intent = Intent(this, UserCartActivity::class.java)
             startActivity(intent)
+        }
+
+        // home
+        val clickHome = findViewById<Button>(R.id.home)
+        clickHome.setOnClickListener {
+            var intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        // logout
+        val clickLogout = findViewById<Button>(R.id.logout)
+        clickLogout.setOnClickListener {
+            Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
+            var intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         list = ArrayList<ListMenu>()

@@ -49,28 +49,16 @@ class AddMenuActivity : AppCompatActivity() {
         val user = Firebase.auth.currentUser
         var uid = "0"
         if(user != null){
-            Toast.makeText(this, "성공", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "성공", Toast.LENGTH_SHORT).show()
             uid = user.uid
-        }else{
-            Toast.makeText(this, "실패", Toast.LENGTH_SHORT).show()
         }
 
         storage = FirebaseStorage.getInstance()
-//        val getImg = findViewById<Button>(R.id.getImgBtn)
-//        getImg.setOnClickListener {
-//            val intent: Intent = Intent(Intent.ACTION_GET_CONTENT).apply { type = "image/*" }
-//            getContent.launch(intent)
-//            uri?.let { upload(it) }
-//        }
 
         var saveMenu = findViewById<Button>(R.id.saveBtn)
         saveMenu.setOnClickListener{
             uri = downloadUri
 
-//            if(uri != null){
-//                var img = findViewById<ImageView>(R.id.menuimg)
-//                img.setImageURI(uri)
-//            }
 
             imgUri = uri.toString()
 

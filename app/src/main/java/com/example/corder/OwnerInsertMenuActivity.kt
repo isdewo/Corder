@@ -33,6 +33,23 @@ class OwnerInsertMenuActivity : AppCompatActivity() {
             startActivity(Intent(this, AddMenuActivity::class.java))
         }
 
+        // home
+        val clickHome = findViewById<Button>(R.id.home)
+        clickHome.setOnClickListener {
+            var intent = Intent(this, OwnerPageActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        // logout
+        val clickLogout = findViewById<Button>(R.id.logout)
+        clickLogout.setOnClickListener {
+            Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
+            var intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         list = ArrayList<ListMenu>()
 
         getListData()

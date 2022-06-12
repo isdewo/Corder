@@ -17,6 +17,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".PayListActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddMenuActivity"
             android:exported="false" />
         <activity
