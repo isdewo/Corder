@@ -40,13 +40,17 @@ class UserCafeInfoActivity : AppCompatActivity() {
         val limit = intent.getIntExtra("limitPrice", 0)
         lowOrder.setText(limit.toString())
 
+        val cafeCode = intent.getStringExtra("cafeCode")
+//        Toast.makeText(this, "$cafeCode", Toast.LENGTH_SHORT).show()
 //        shopPicture.setImageBitmap(img)
 
         val getMenu = findViewById<Button>(R.id.getmenu)
 
         getMenu.setOnClickListener {
             // 메뉴확인페이지
-            startActivity(Intent(this, MenuActivity::class.java))
+            var intent = Intent(this, MenuActivity::class.java)
+            intent.putExtra("cafeCode", cafeCode)
+            startActivity(intent)
         }
     }
 }

@@ -38,10 +38,12 @@ class JoinActivity : AppCompatActivity(){
                 R.id.customerBtn -> {
                     clickBtn = 0
                     userType = "customer"
+                    userSort = 0
                 }
                 R.id.supervisorBtn -> {
                     clickBtn = 1
                     userType = "supervisor"
+                    userSort = Random.nextInt(0,200)
                 }
             }
         }
@@ -61,19 +63,6 @@ class JoinActivity : AppCompatActivity(){
         val inputName = findViewById<EditText>(R.id.inputName)
         val name = inputName.text.toString().trim()
 
-        val sellerButton = findViewById<Button>(R.id.supervisorBtn)
-        sellerButton.setOnClickListener{
-            val userNumb = Random.nextInt(0,200)
-            userSort = userNumb
-            userType = "supervisor"
-        }
-
-        val customerButton = findViewById<Button>(R.id.customerBtn)
-        customerButton.setOnClickListener {
-            userSort = 0
-            userType = "customer"
-        }
-
         if (email.isEmpty() || password.isEmpty() || name.isEmpty()) {
             isBlank = true
             return
@@ -88,10 +77,10 @@ class JoinActivity : AppCompatActivity(){
                     if(task.isSuccessful){
                         Log.d(TAG,"회원가입 성공")
                         val user = auth.currentUser
-                        Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
                         val id = auth.uid
+//                        Toast.makeText(this, "$id", Toast.LENGTH_SHORT).show()
                         updateUI(user)
-
                         registerUser(email, name, id , password, userSort)
                     }
                     else{
@@ -111,9 +100,7 @@ class JoinActivity : AppCompatActivity(){
         if(user != null){
             if(clickBtn == 0){
                 // 로그인 화면으로 이동
-
 //                Toast.makeText(this, "customer로 회원가입 되었습니다.", Toast.LENGTH_SHORT).show()
-
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)

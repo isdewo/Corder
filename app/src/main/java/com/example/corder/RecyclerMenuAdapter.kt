@@ -3,7 +3,9 @@ package com.example.corder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.list_menu.view.*
 
 
@@ -33,8 +35,10 @@ class RecyclerMenuAdapter(private val items: ArrayList<ListMenu>, private val on
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         private  val view: View = v
+        var menu = view.findViewById<ImageView>(R.id.menu)
         fun bind(listener: View.OnClickListener, item: ListMenu){
-            view.menu.setImageDrawable(item.img)
+//            view.menu.setImageDrawable(item.img)
+//            Glide.with(menu.context).load(item.img).into(menu)
             view.menuName.text = item.menuName
             view.menuCost.text = item.menuCost.toString()
             view.setOnClickListener(listener)

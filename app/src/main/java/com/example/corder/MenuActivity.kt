@@ -9,9 +9,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 
 class MenuActivity : AppCompatActivity() {
+
+    private lateinit var dbref : DatabaseReference
+    private lateinit var database : FirebaseDatabase
+    private lateinit var menuList : RecyclerView
+    private lateinit var list : ArrayList<ListMenu>
+    private lateinit var storage: FirebaseStorage
+    private lateinit var storageRef: StorageReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
@@ -23,26 +36,49 @@ class MenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val list = ArrayList<ListMenu>()
+        list = ArrayList<ListMenu>()
 
-        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, "1", "아메리카노", 3000))
-        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, "2", "카페라떼", 3500))
-        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, "3", "요거트스무디", 5500))
-        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, "4", "치즈케이크", 8000))
-        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, "5", "초코케이크", 8000))
+        getListData()
 
 
-        val adapter = RecyclerMenuAdapter(list, {data -> adapterOnClick(data)})
-        val menuList = findViewById<RecyclerView>(R.id.menuList)
+        menuList = findViewById<RecyclerView>(R.id.menuList)
         menuList.layoutManager = LinearLayoutManager(this)
-        menuList.adapter = adapter
     }
 
+    private fun getListData(){
+        var supervisorId = intent.getStringExtra("cafeCode").toString()
+//        Toast.makeText(this@MenuActivity, "$supervisorId", Toast.LENGTH_SHORT).show()
+        database = FirebaseDatabase.getInstance()
+        dbref = database.getReference("menus").child(supervisorId)
+        storage = FirebaseStorage.getInstance()
+        storageRef = storage.reference
+
+        dbref.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                list.clear()
+
+                for(dataSnapshot in snapshot.children){
+
+                    val img = ""
+                    val menuName = dataSnapshot.child("menuName").getValue().toString()
+                    val menuCost = dataSnapshot.child("menuCost").getValue().toString()
+
+                    list.add(ListMenu(img, supervisorId, menuName, menuCost.toInt()))
+                }
+                val adapter = RecyclerMenuAdapter(list, {data -> adapterOnClick(data)})
+                menuList.adapter = adapter
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(applicationContext, "error", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+
     private fun adapterOnClick(data: ListMenu){
-//        Toast.makeText(applicationContext, "Clicked -> menuName: ${data.menuName}, cost: ${data.menuCost}", Toast.LENGTH_SHORT).show()
         var intent = Intent(this, UserSelectDrinkActivity::class.java)
 
-//
+
 //        intent.putExtra("image", bitmap)
         intent.putExtra("name", data.menuName)
         intent.putExtra("cost", data.menuCost)

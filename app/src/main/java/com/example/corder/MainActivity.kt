@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity(){
         intent.putExtra("image", data.imgUri)
         intent.putExtra("name", data.cafeName)
         intent.putExtra("number", data.cafeCode)
+        intent.putExtra("cafeCode", data.cafeCode)
         intent.putExtra("cafeTime", data.cafeTime)
         intent.putExtra("cafeCall", data.cafeCall)
         intent.putExtra("cafeAddress", data.cafeAddress)

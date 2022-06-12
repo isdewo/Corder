@@ -38,10 +38,7 @@ class RecyclerMainAdapter(private var items: ArrayList<ListData>, private val on
         var ivImg = view.findViewById<ImageView>(R.id.ivImg)
         var tvCname = view.findViewById<TextView>(R.id.tvCname)
         fun bind(listener: View.OnClickListener, item: ListData) {
-//            var uri = Uri.parse(item.imgUri)
             Glide.with(ivImg.context).load(item.imgUri).into(ivImg)
-//            ivImg.setImageURI(uri)
-//            ivImg.setImageURI(Uri.parse(item.imgUrl))
             tvCname.setText(item.cafeName)
             view.setOnClickListener(listener)
         }

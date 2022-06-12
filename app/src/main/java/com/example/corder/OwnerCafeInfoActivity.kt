@@ -64,7 +64,6 @@ class OwnerCafeInfoActivity : AppCompatActivity() {
         }
 
 
-
         val clickSavebtn = findViewById<Button>(R.id.saveBtn)
         clickSavebtn.setOnClickListener {
 

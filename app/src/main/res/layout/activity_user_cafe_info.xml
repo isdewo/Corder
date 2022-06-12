@@ -89,12 +89,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="5dp">
+        android:layout_margin="5dp">
         <TextView
-            android:layout_width="130dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
-            android:text="최소주문: "
+            android:text="최소주문금액: "
             android:textSize="25sp" />
         <TextView
             android:id="@+id/lowOrder"
