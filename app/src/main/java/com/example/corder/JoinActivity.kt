@@ -2,12 +2,10 @@ package com.example.corder
 
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -67,11 +65,13 @@ class JoinActivity : AppCompatActivity(){
         sellerButton.setOnClickListener{
             val userNumb = Random.nextInt(0,200)
             userSort = userNumb
+            userType = "supervisor"
         }
 
         val customerButton = findViewById<Button>(R.id.customerBtn)
         customerButton.setOnClickListener {
             userSort = 0
+            userType = "customer"
         }
 
         if (email.isEmpty() || password.isEmpty() || name.isEmpty()) {
@@ -91,7 +91,8 @@ class JoinActivity : AppCompatActivity(){
                         Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
                         val id = auth.uid
                         updateUI(user)
-                        registerUser(email, name, id, password, userSort)
+
+                        registerUser(email, name, id , password, userSort)
                     }
                     else{
                         Log.d(TAG,"회원가입 실패",task.exception)
@@ -104,14 +105,15 @@ class JoinActivity : AppCompatActivity(){
                 Toast.makeText(this, "빈 칸을 모두 채워 주세요",Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 
     private fun updateUI(user: FirebaseUser?){
         if(user != null){
             if(clickBtn == 0){
                 // 로그인 화면으로 이동
+
 //                Toast.makeText(this, "customer로 회원가입 되었습니다.", Toast.LENGTH_SHORT).show()
+
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)
@@ -119,6 +121,7 @@ class JoinActivity : AppCompatActivity(){
             }else if(clickBtn == 1){
                 // 가게정보 등록 화면으로 이동
 //                Toast.makeText(this, "supervisor로 회원가입 되었습니다.", Toast.LENGTH_SHORT).show()
+
                 val intent = Intent(this, OwnerCafeInfoActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)

@@ -40,6 +40,8 @@ class UserCafeInfoActivity : AppCompatActivity() {
         val limit = intent.getIntExtra("limitPrice", 0)
         lowOrder.setText(limit.toString())
 
+//        shopPicture.setImageBitmap(img)
+
         val getMenu = findViewById<Button>(R.id.getmenu)
 
         getMenu.setOnClickListener {

@@ -1,7 +1,5 @@
 package com.example.corder
 
-import android.graphics.drawable.Drawable
-
 data class ListData(var imgUri: String,
                     var cafeCode: String ?= null,
                     var cafeName: String ?= null,
