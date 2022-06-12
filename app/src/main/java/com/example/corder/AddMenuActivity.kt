@@ -2,19 +2,16 @@ package com.example.corder
 
 import android.content.ContentValues
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.icu.text.SimpleDateFormat
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -22,7 +19,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_add_menu.*
-import kotlinx.android.synthetic.main.activity_owner_cafe_info.*
 import java.util.*
 
 class AddMenuActivity : AppCompatActivity() {
@@ -32,14 +28,14 @@ class AddMenuActivity : AppCompatActivity() {
     private lateinit var storage: FirebaseStorage
     private val resultLauncher: ActivityResultLauncher<Intent>? = null
     var uri: Uri? = null
-    var imgUri: String = ""
+    var imgUri:String = ""
     var downloadUri: Uri? = null
     private val PICK_IMAGE = 10001
     val calendar: Calendar = Calendar.getInstance()
-//    private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-//        uri= (result.data?.data)
-//        uri?.let { upload(it) }
-//    }
+    private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+        uri= (result.data?.data)
+        uri?.let { upload(it) }
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,23 +51,20 @@ class AddMenuActivity : AppCompatActivity() {
             Toast.makeText(this, "실패", Toast.LENGTH_SHORT).show()
         }
 
+
         storage = FirebaseStorage.getInstance()
-//        val getImg = findViewById<Button>(R.id.getImgBtn)
-//        getImg.setOnClickListener {
-//            val intent: Intent = Intent(Intent.ACTION_GET_CONTENT).apply { type = "image/*" }
-//            getContent.launch(intent)
-//            uri?.let { upload(it) }
-//        }
+        val getImg = findViewById<Button>(R.id.upLoadImg)
+        getImg.setOnClickListener {
+           val intent: Intent = Intent(Intent.ACTION_GET_CONTENT).apply { type = "image/*" }
+            getContent.launch(intent)
+            uri?.let { upload(it) }
+        }
+
 
         var saveMenu = findViewById<Button>(R.id.saveBtn)
         saveMenu.setOnClickListener{
+
             uri = downloadUri
-
-//            if(uri != null){
-//                var img = findViewById<ImageView>(R.id.menuimg)
-//                img.setImageURI(uri)
-//            }
-
             imgUri = uri.toString()
 
             val name = menuName.text.toString()
