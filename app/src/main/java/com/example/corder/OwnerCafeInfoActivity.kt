@@ -50,7 +50,6 @@ class OwnerCafeInfoActivity : AppCompatActivity() {
         val clickSavebtn = findViewById<Button>(R.id.saveBtn)
         clickSavebtn.setOnClickListener {
 
-//            Toast.makeText(this, "저장버튼: ${imgUri}", Toast.LENGTH_SHORT).show()
             imgUri = "http://t2.gstatic.com/licensed-image?q=tbn:ANd9GcS9DvbOUdtK8lQS6VYAfWQokJcjDSJqL2gzA7oKVIfBJfrRuHSA7p85-bbuaLU0vlKAK-zvPmgK9EAGbYE8ao8"
 //            val imgUri = uri.toString()
             val name = cafeName.text.toString()

@@ -39,9 +39,11 @@ class JoinActivity : AppCompatActivity(){
             when(checkedId){
                 R.id.customerBtn -> {
                     clickBtn = 0
+                    userType = "customer"
                 }
                 R.id.supervisorBtn -> {
                     clickBtn = 1
+                    userType = "supervisor"
                 }
             }
         }
@@ -65,13 +67,11 @@ class JoinActivity : AppCompatActivity(){
         sellerButton.setOnClickListener{
             val userNumb = Random.nextInt(0,200)
             userSort = userNumb
-            userType = "supervisor"
         }
 
         val customerButton = findViewById<Button>(R.id.customerBtn)
         customerButton.setOnClickListener {
             userSort = 0
-            userType = "customer"
         }
 
         if (email.isEmpty() || password.isEmpty() || name.isEmpty()) {
@@ -128,7 +128,10 @@ class JoinActivity : AppCompatActivity(){
     }
     
     private fun registerUser(userEmail:String,userName: String,uID:String?, userPW:String, userSort:Int){
-        val user = User(userEmail, userName, uID , userPW, userSort)
-        database.child("users").push().setValue(user)
+        val user = User(userEmail, userName, uID , userPW, userSort, userType)
+        val curUser = Firebase.auth.currentUser
+        if(curUser != null){
+            database.child("users").child(curUser.uid).setValue(user)
+        }
     }
 }

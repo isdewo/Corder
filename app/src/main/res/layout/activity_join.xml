@@ -95,7 +95,7 @@
             android:id="@+id/customerBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="coustomer"
+            android:text="customer"
             android:textSize="16sp" />
 
         <RadioButton

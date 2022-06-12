@@ -24,12 +24,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listMenu"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="500dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/list_menu"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/addBtn"
+        android:id="@+id/addMenu"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_radius"

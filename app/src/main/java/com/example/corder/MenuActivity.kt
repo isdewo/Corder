@@ -24,11 +24,11 @@ class MenuActivity : AppCompatActivity() {
         }
 
         val list = ArrayList<ListMenu>()
-        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, 1, "아메리카노", 3000))
-        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, 2, "카페라떼", 3500))
-        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, 3, "요거트스무디", 5500))
-        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, 4, "치즈케이크", 8000))
-        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, 5, "초코케이크", 8000))
+        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, "1", "아메리카노", 3000))
+        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, "2", "카페라떼", 3500))
+        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, "3", "요거트스무디", 5500))
+        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, "4", "치즈케이크", 8000))
+        list.add(ListMenu(ContextCompat.getDrawable(this, R.drawable.americano)!!, "5", "초코케이크", 8000))
 
         val adapter = RecyclerMenuAdapter(list, {data -> adapterOnClick(data)})
         val menuList = findViewById<RecyclerView>(R.id.menuList)
