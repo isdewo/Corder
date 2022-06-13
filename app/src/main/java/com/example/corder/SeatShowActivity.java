@@ -51,7 +51,7 @@ public class SeatShowActivity extends AppCompatActivity {
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), com.example.corder.LoginActivity.class));
+                startActivity(new Intent(getApplicationContext(), com.example.corder.OwnerPageActivity.class));
             }
         });
 
@@ -222,7 +222,7 @@ public class SeatShowActivity extends AppCompatActivity {
                         emptySeats++;
                         //Toast.makeText(getApplicationContext(), "자리 빔", Toast.LENGTH_SHORT).show();
                     }
-                    Toast.makeText(getApplicationContext(), getId() +"번 빔 / 빈 자리 : " + emptySeats, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), getId() +"번 빔 / 빈 자리 : " + emptySeats, Toast.LENGTH_SHORT).show();
                 }
             });
         }
