@@ -23,7 +23,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:background="@drawable/button"
-        android:id="@+id/btn2"
+        android:id="@+id/editSeat"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

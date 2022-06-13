@@ -50,6 +50,7 @@ class UserCartActivity : AppCompatActivity() {
             finish()
         }
 
+
         // 결제
         val pay = findViewById<Button>(R.id.pay)
         pay.setOnClickListener {
@@ -119,6 +120,12 @@ class UserCartActivity : AppCompatActivity() {
     }
 
     private fun adapterOnClick(data: ListOrderMenu){
+
+
+//        val menuEat = findViewById<Button>(R.id.menuEat)
+//        menuEat.setOnClickListener {
+//            startActivity(Intent(applicationContext, SeatEditActivity::class.java))
+//        }
 
     }
 }

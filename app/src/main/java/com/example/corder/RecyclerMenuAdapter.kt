@@ -41,7 +41,7 @@ class RecyclerMenuAdapter(private val items: ArrayList<ListMenu>, private val on
         val menucost = view.findViewById<TextView>(R.id.menuCost)
 
         fun bind(listener: View.OnClickListener, item: ListMenu){
-            Glide.with(menu.context).load(item.img).error(R.drawable.examplecoffee).into(menu)
+            Glide.with(menu.context).load(item.img).error(R.drawable.americano).into(menu)
             menuname.setText(item.menuName)
             menucost.setText(item.menuCost.toString())
             view.setOnClickListener(listener)

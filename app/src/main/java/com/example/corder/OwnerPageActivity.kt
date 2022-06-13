@@ -14,7 +14,7 @@ class OwnerPageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_owner_page)
 
         val moveBtn1 = findViewById<Button>(R.id.btn1)
-        val moveBtn2 = findViewById<Button>(R.id.btn2)
+        val moveBtn2 = findViewById<Button>(R.id.editSeat)
         val moveBtn3 = findViewById<Button>(R.id.btn3)
         val moveBtn4 = findViewById<Button>(R.id.btn4)
         val moveBtn5 = findViewById<Button>(R.id.btn5)
@@ -26,7 +26,7 @@ class OwnerPageActivity : AppCompatActivity() {
 
         moveBtn2.setOnClickListener {
             // 좌석 배치 변경
-            startActivity(Intent(this, OwnerCheckSeatActivity::class.java))
+            startActivity(Intent(this, SeatEditActivity::class.java))
         }
 
         moveBtn3.setOnClickListener {
