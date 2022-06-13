@@ -45,10 +45,7 @@ class AddMenuActivity : AppCompatActivity() {
         val user = Firebase.auth.currentUser
         var uid = "0"
         if(user != null){
-            Toast.makeText(this, "성공", Toast.LENGTH_SHORT).show()
             uid = user.uid
-        }else{
-            Toast.makeText(this, "실패", Toast.LENGTH_SHORT).show()
         }
 
 

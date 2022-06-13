@@ -52,7 +52,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:textColor="#2196F3"
-            android:text="15분"
+            android:text="20분"
             android:textSize="25sp"/>
     </LinearLayout>
     <LinearLayout

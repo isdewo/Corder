@@ -76,7 +76,6 @@ class PayListActivity : AppCompatActivity() {
                 list.clear()
 
                 for (dataSnapshot in snapshot.children) {
-
                     val menuName = dataSnapshot.child("menuName").getValue().toString()
                     val menuCost = dataSnapshot.child("menuCost").getValue().toString().toInt()
                     val count = dataSnapshot.child("countMenu").getValue().toString().toInt()
